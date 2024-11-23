@@ -9,9 +9,11 @@
 /* Begin PBXBuildFile section */
 		660DFC232CF20A6200CA5592 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 660DFC222CF20A6200CA5592 /* Alamofire */; };
 		660DFC262CF20A7600CA5592 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 660DFC252CF20A7600CA5592 /* Kingfisher */; };
+		660DFC482CF2590700CA5592 /* Helpers in Frameworks */ = {isa = PBXBuildFile; productRef = 660DFC472CF2590700CA5592 /* Helpers */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		660DFC3C2CF2562A00CA5592 /* Modules */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Modules; sourceTree = "<group>"; };
 		6642BB832CF2062500AD326D /* Flying Rocks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Flying Rocks.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -28,6 +30,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				660DFC482CF2590700CA5592 /* Helpers in Frameworks */,
 				660DFC262CF20A7600CA5592 /* Kingfisher in Frameworks */,
 				660DFC232CF20A6200CA5592 /* Alamofire in Frameworks */,
 			);
@@ -36,10 +39,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		660DFC462CF2590700CA5592 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		6642BB7A2CF2062500AD326D = {
 			isa = PBXGroup;
 			children = (
+				660DFC3C2CF2562A00CA5592 /* Modules */,
 				6642BB852CF2062500AD326D /* Flying Rocks */,
+				660DFC462CF2590700CA5592 /* Frameworks */,
 				6642BB842CF2062500AD326D /* Products */,
 			);
 			sourceTree = "<group>";
@@ -74,6 +86,7 @@
 			packageProductDependencies = (
 				660DFC222CF20A6200CA5592 /* Alamofire */,
 				660DFC252CF20A7600CA5592 /* Kingfisher */,
+				660DFC472CF2590700CA5592 /* Helpers */,
 			);
 			productName = "Flying Rocks";
 			productReference = 6642BB832CF2062500AD326D /* Flying Rocks.app */;
@@ -107,6 +120,7 @@
 			packageReferences = (
 				660DFC212CF20A6200CA5592 /* XCRemoteSwiftPackageReference "Alamofire" */,
 				660DFC242CF20A7600CA5592 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				660DFC432CF2575C00CA5592 /* XCLocalSwiftPackageReference "Modules" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 6642BB842CF2062500AD326D /* Products */;
@@ -341,6 +355,13 @@
 		};
 /* End XCConfigurationList section */
 
+/* Begin XCLocalSwiftPackageReference section */
+		660DFC432CF2575C00CA5592 /* XCLocalSwiftPackageReference "Modules" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = Modules;
+		};
+/* End XCLocalSwiftPackageReference section */
+
 /* Begin XCRemoteSwiftPackageReference section */
 		660DFC212CF20A6200CA5592 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
 			isa = XCRemoteSwiftPackageReference;
@@ -370,6 +391,10 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 660DFC242CF20A7600CA5592 /* XCRemoteSwiftPackageReference "Kingfisher" */;
 			productName = Kingfisher;
+		};
+		660DFC472CF2590700CA5592 /* Helpers */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Helpers;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

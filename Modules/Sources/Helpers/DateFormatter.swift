@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension DateFormatter {
+public extension DateFormatter {
     static let apiDate: DateFormatter = {
         let formatter = DateFormatter()
         

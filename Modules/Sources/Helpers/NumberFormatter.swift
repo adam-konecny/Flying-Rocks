@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension NumberFormatter {
+public extension NumberFormatter {
     private static let numberFormatterForExtraction: NumberFormatter = {
         let formatter = NumberFormatter()
         
@@ -31,7 +31,7 @@ extension NumberFormatter {
             return number
         }
         
-        throw AppError.wrongNumberFormat
+        throw CustomError.wrongNumberFormat
     }
     
     static func double(from string: String) throws -> Double {

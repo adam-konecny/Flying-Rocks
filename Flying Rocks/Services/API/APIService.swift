@@ -6,6 +6,7 @@
 //
 
 import Alamofire
+import Helpers
 import Foundation
 
 class APIService: APIServiceProtocol {
