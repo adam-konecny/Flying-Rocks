@@ -6,12 +6,17 @@
 //
 
 class MockedAPIService: APIServiceProtocol {
-    func getMeteorites() async throws -> [Meteorite] {
-        [
+    func getMeteorites(page: Pagination) async throws -> PaginatedList<Meteorite> {
+        let data: [Meteorite] = [
             .random,
             .random,
             .random,
             .random
         ]
+        
+        return PaginatedList(
+            data: data,
+            currentPage: page
+        )
     }
 }

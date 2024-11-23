@@ -33,8 +33,8 @@ class APIService: APIServiceProtocol {
         self.configuration = configuration
     }
     
-    private func makeRequest<T: Decodable>(endpoint: String, type: T.Type) async throws -> T {
-        let reponse = await AF.request(configuration.baseUrl)
+    private func makeRequest<T: Decodable>(url: String, type: T.Type) async throws -> T {
+        let reponse = await AF.request(url)
             .validate()
             .serializingDecodable(T.self, decoder: decoder)
             .response
@@ -47,10 +47,19 @@ class APIService: APIServiceProtocol {
         }
     }
     
-    func getMeteorites() async throws -> [Meteorite] {
-        try await makeRequest(
-            endpoint: configuration.endpoints.meteorites,
+    private func buildURL(page: Pagination) -> String {
+        configuration.baseUrl + "?$limit=\(page.limit)&$offset=\(page.offset)"
+    }
+    
+    func getMeteorites(page: Pagination) async throws -> PaginatedList<Meteorite> {
+        let data = try await makeRequest(
+            url: buildURL(page: page),
             type: [Meteorite].self
+        )
+        
+        return PaginatedList(
+            data: data,
+            currentPage: page
         )
     }
 }

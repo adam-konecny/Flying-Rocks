@@ -6,5 +6,5 @@
 //
 
 protocol APIServiceProtocol {
-    func getMeteorites() async throws -> [Meteorite]
+    func getMeteorites(page: Pagination) async throws -> PaginatedList<Meteorite>
 }

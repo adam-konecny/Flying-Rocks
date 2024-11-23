@@ -40,6 +40,9 @@ struct MeteoritesList: View {
                 ForEach(meteorites) { meteorite in
                     NavigationLink(value: meteorite) {
                         MeteoriteListItem(meteorite: meteorite)
+                            .onAppear {
+                                viewModel.loadMore(currentItem: meteorite)
+                            }
                     }
                 }
             }

@@ -30,7 +30,7 @@ class MeteoritesMapViewModel: ViewModel {
     
     private func loadMeteorites() async {
         do {
-            let meteorites = try await services.apiService.getMeteorites()
+            let meteorites = try await services.apiService.getMeteorites(page: .default).data
             
             dataState = .loaded(meteorites)
         } catch {
