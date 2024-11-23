@@ -14,26 +14,26 @@ struct MeteoriteDetail: View {
     var body: some View {
         ScrollView {
             VStack {
-                imageView
+//                imageView
             }
             .padding()
         }
-        .navigationTitle(viewModel.meteorite.nickname)
+        .navigationTitle(viewModel.meteorite.name)
         .toolbar(.hidden, for: .tabBar)
     }
     
-    private var imageView: some View {
-        KFImage
-            .url(URL(string: viewModel.meteorite.image)!)
-            .placeholder {
-                Color.gray.opacity(0.2)
-                    .overlay(Image(systemName: "person"))
-            }
-            .resizable()
-            .aspectRatio(contentMode: .fill)
-            .frame(width: 160.0)
-            .clipShape(.rect(cornerRadius: 16.0))
-    }
+//    private var imageView: some View {
+//        KFImage
+//            .url(URL(string: viewModel.meteorite.image)!)
+//            .placeholder {
+//                Color.gray.opacity(0.2)
+//                    .overlay(Image(systemName: "person"))
+//            }
+//            .resizable()
+//            .aspectRatio(contentMode: .fill)
+//            .frame(width: 160.0)
+//            .clipShape(.rect(cornerRadius: 16.0))
+//    }
 }
 
 #Preview {

@@ -10,6 +10,7 @@ import Foundation
 enum AppError: Error {
     case unknownError
     case wrongDateFormat
+    case wrongNumberFormat
 }
 
 extension AppError: LocalizedError {
@@ -19,6 +20,8 @@ extension AppError: LocalizedError {
             return "Unknown error!"
         case .wrongDateFormat:
             return "Date format is wrong!"
+        case .wrongNumberFormat:
+            return "Number format is wrong!"
         }
     }
 }

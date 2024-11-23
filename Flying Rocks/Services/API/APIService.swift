@@ -34,7 +34,7 @@ class APIService: APIServiceProtocol {
     }
     
     private func makeRequest<T: Decodable>(endpoint: String, type: T.Type) async throws -> T {
-        let reponse = await AF.request(configuration.baseUrl + endpoint)
+        let reponse = await AF.request(configuration.baseUrl)
             .validate()
             .serializingDecodable(T.self, decoder: decoder)
             .response

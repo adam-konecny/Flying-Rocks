@@ -37,7 +37,7 @@ struct MeteoritesMap: View {
     private func loadedView(_ meteorites: [Meteorite]) -> some View {
         ScrollView {
             LazyVStack(spacing: 24.0) {
-                ForEach(meteorites, id: \.self) { meteorite in
+                ForEach(meteorites) { meteorite in
                     NavigationLink(value: meteorite) {
                         MeteoriteListItem(meteorite: meteorite)
                     }

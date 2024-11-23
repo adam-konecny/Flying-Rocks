@@ -13,7 +13,7 @@ struct MeteoriteListItem: View {
     
     var body: some View {
         HStack {
-            imageView
+//            imageView
             
             infoView
             
@@ -27,34 +27,36 @@ struct MeteoriteListItem: View {
         }
     }
     
-    private var imageView: some View {
-        KFImage
-            .url(URL(string: meteorite.image)!)
-            .placeholder {
-                Color.gray.opacity(0.2)
-                    .overlay(Image(systemName: "person"))
-            }
-            .resizable()
-            .aspectRatio(contentMode: .fill)
-            .frame(width: 80.0)
-            .clipShape(.rect(cornerRadius: 8.0))
-    }
+//    private var imageView: some View {
+//        KFImage
+//            .url(URL(string: meteorite.image)!)
+//            .placeholder {
+//                Color.gray.opacity(0.2)
+//                    .overlay(Image(systemName: "person"))
+//            }
+//            .resizable()
+//            .aspectRatio(contentMode: .fill)
+//            .frame(width: 80.0)
+//            .clipShape(.rect(cornerRadius: 8.0))
+//    }
     
     private var infoView: some View {
         VStack(alignment: .leading) {
-            Text(meteorite.fullName)
+            Text(meteorite.name)
                 .font(.title3)
                 .foregroundColor(.primary)
             
-            Text("\"" + meteorite.nickname + "\"")
+            if let location = meteorite.location {
+                Text("\(location.latitude) x \(location.longitude)")
+                    .font(.body)
+                    .foregroundColor(.secondary)
+            }
+            
+            Text(String(meteorite.mass ?? 0))
                 .font(.body)
                 .foregroundColor(.secondary)
             
-            Text(meteorite.interpretedBy)
-                .font(.body)
-                .foregroundColor(.secondary)
-            
-            Text(meteorite.birthdate.string(with: .dayMonthYear))
+            Text(meteorite.date?.string(with: .dayMonthYear) ?? "TODO")
                 .font(.subheadline)
                 .foregroundColor(.secondary)
         }
