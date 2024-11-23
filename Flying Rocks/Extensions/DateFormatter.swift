@@ -8,10 +8,10 @@
 import Foundation
 
 extension DateFormatter {
-    static let server: DateFormatter = {
+    static let apiDate: DateFormatter = {
         let formatter = DateFormatter()
         
-        formatter.dateFormat = "MMM d, yyyy"
+        formatter.dateFormat = "yyyy-MM-dd'T'hh:mm:ss.sss"
         
         return formatter
     }()

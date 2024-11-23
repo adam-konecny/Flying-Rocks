@@ -1,13 +1,13 @@
 //
-//  Person.swift
+//  Meteorite.swift
 //  Flying Rocks
 //
-//  Created by Adam Konečný on 06.11.2024.
+//  Created by Adam Konečný on 23.11.2024.
 //
 
 import Foundation
 
-struct Person: Decodable, Hashable {
+struct Meteorite: Decodable, Hashable {
     let fullName: String
     let nickname: String
     let hogwartsHouse: String

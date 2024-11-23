@@ -6,8 +6,7 @@
 //
 
 struct Endpoints {
-    let characters: String
-    let spells: String
+    let meteorites: String
 }
 
 // https://github.com/fedeperin/potterapi?ref=public_apis
@@ -17,10 +16,9 @@ struct Configuration {
     
     static var production: Configuration {
         .init(
-            baseUrl: "https://potterapi-fedeperin.vercel.app",
+            baseUrl: "https://data.nasa.gov/resource/gh4g-9sfh.json",
             endpoints: .init(
-                characters: "/en/characters",
-                spells: "/en/spells"
+                meteorites: "/en/characters"
             )
         )
     }

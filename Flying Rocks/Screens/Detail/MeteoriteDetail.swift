@@ -1,15 +1,15 @@
 //
-//  CharacterDetail.swift
+//  MeteoriteDetail.swift
 //  Flying Rocks
 //
-//  Created by Adam Konečný on 07.11.2024.
+//  Created by Adam Konečný on 23.11.2024.
 //
 
 import Kingfisher
 import SwiftUI
 
-struct CharacterDetail: View {
-    @State var viewModel: CharacterDetailViewModel
+struct MeteoriteDetail: View {
+    @State var viewModel: MeteoriteDetailViewModel
     
     var body: some View {
         ScrollView {
@@ -18,13 +18,13 @@ struct CharacterDetail: View {
             }
             .padding()
         }
-        .navigationTitle(viewModel.character.nickname)
+        .navigationTitle(viewModel.meteorite.nickname)
         .toolbar(.hidden, for: .tabBar)
     }
     
     private var imageView: some View {
         KFImage
-            .url(URL(string: viewModel.character.image)!)
+            .url(URL(string: viewModel.meteorite.image)!)
             .placeholder {
                 Color.gray.opacity(0.2)
                     .overlay(Image(systemName: "person"))
@@ -37,10 +37,10 @@ struct CharacterDetail: View {
 }
 
 #Preview {
-    CharacterDetail(
-        viewModel: CharacterDetailViewModel(
+    MeteoriteDetail(
+        viewModel: MeteoriteDetailViewModel(
             services: MockedServices(),
-            character: .random
+            meteorite: .random
         )
     )
 }

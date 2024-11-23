@@ -2,7 +2,7 @@
 //  BaseTabView.swift
 //  Flying Rocks
 //
-//  Created by Adam Konečný on 07.11.2024.
+//  Created by Adam Konečný on 23.11.2024.
 //
 
 import SwiftUI
@@ -12,21 +12,21 @@ struct BaseTabView: View {
     
     var body: some View {
         TabView {
-            CharactersList(viewModel: CharactersListViewModel(services: services))
+            MeteoritesList(viewModel: MeteoritesListViewModel(services: services))
                 .tabItem {
                     Label {
-                        Text("Characters")
+                        Text("Meteorites")
                     } icon: {
-                        Image(systemName: "person.3.fill")
+                        Image(systemName: "list.bullet")
                     }
                 }
             
-            SpellsList(viewModel: SpellsListViewModel(services: services))
+            MeteoritesMap(viewModel: MeteoritesMapViewModel(services: services))
                 .tabItem {
                     Label {
-                        Text("Spells")
+                        Text("Map")
                     } icon: {
-                        Image(systemName: "wand.and.sparkles")
+                        Image(systemName: "map")
                     }
                 }
         }

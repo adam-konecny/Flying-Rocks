@@ -6,16 +6,7 @@
 //
 
 class MockedAPIService: APIServiceProtocol {
-    func getCharacters() async throws -> [Person] {
-        [
-            .random,
-            .random,
-            .random,
-            .random
-        ]
-    }
-    
-    func getSpells() async throws -> [Spell] {
+    func getMeteorites() async throws -> [Meteorite] {
         [
             .random,
             .random,

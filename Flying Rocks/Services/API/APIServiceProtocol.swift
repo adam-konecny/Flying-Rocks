@@ -6,6 +6,5 @@
 //
 
 protocol APIServiceProtocol {
-    func getCharacters() async throws -> [Person]
-    func getSpells() async throws -> [Spell]
+    func getMeteorites() async throws -> [Meteorite]
 }

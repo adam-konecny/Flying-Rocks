@@ -1,15 +1,15 @@
 //
-//  CharacterListItem.swift
+//  MeteoriteListItem.swift
 //  Flying Rocks
 //
-//  Created by Adam Konečný on 07.11.2024.
+//  Created by Adam Konečný on 23.11.2024.
 //
 
 import Kingfisher
 import SwiftUI
 
-struct CharacterListItem: View {
-    let character: Person
+struct MeteoriteListItem: View {
+    let meteorite: Meteorite
     
     var body: some View {
         HStack {
@@ -29,7 +29,7 @@ struct CharacterListItem: View {
     
     private var imageView: some View {
         KFImage
-            .url(URL(string: character.image)!)
+            .url(URL(string: meteorite.image)!)
             .placeholder {
                 Color.gray.opacity(0.2)
                     .overlay(Image(systemName: "person"))
@@ -42,19 +42,19 @@ struct CharacterListItem: View {
     
     private var infoView: some View {
         VStack(alignment: .leading) {
-            Text(character.fullName)
+            Text(meteorite.fullName)
                 .font(.title3)
                 .foregroundColor(.primary)
             
-            Text("\"" + character.nickname + "\"")
+            Text("\"" + meteorite.nickname + "\"")
                 .font(.body)
                 .foregroundColor(.secondary)
             
-            Text(character.interpretedBy)
+            Text(meteorite.interpretedBy)
                 .font(.body)
                 .foregroundColor(.secondary)
             
-            Text(character.birthdate.string(with: .dayMonthYear))
+            Text(meteorite.birthdate.string(with: .dayMonthYear))
                 .font(.subheadline)
                 .foregroundColor(.secondary)
         }
@@ -63,8 +63,8 @@ struct CharacterListItem: View {
 
 #Preview {
     VStack {
-        CharacterListItem(
-            character: .random
+        MeteoriteListItem(
+            meteorite: .random
         )
     }
     .padding()

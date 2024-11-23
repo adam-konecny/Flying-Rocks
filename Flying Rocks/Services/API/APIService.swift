@@ -19,7 +19,7 @@ class APIService: APIServiceProtocol {
             
             let dateString = try container.decode(String.self)
             
-            guard let date = dateString.date(with: .server) else {
+            guard let date = dateString.date(with: .apiDate) else {
                 throw AppError.wrongDateFormat
             }
             
@@ -47,17 +47,10 @@ class APIService: APIServiceProtocol {
         }
     }
     
-    func getCharacters() async throws -> [Person] {
+    func getMeteorites() async throws -> [Meteorite] {
         try await makeRequest(
-            endpoint: configuration.endpoints.characters,
-            type: [Person].self
-        )
-    }
-    
-    func getSpells() async throws -> [Spell] {
-        try await makeRequest(
-            endpoint: configuration.endpoints.spells,
-            type: [Spell].self
+            endpoint: configuration.endpoints.meteorites,
+            type: [Meteorite].self
         )
     }
 }

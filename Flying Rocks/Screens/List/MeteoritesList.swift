@@ -1,14 +1,14 @@
 //
-//  CharactersList.swift
+//  MeteoritesList.swift
 //  Flying Rocks
 //
-//  Created by Adam Konečný on 06.11.2024.
+//  Created by Adam Konečný on 23.11.2024.
 //
 
 import SwiftUI
 
-struct CharactersList: View {
-    @State var viewModel: CharactersListViewModel
+struct MeteoritesList: View {
+    @State var viewModel: MeteoritesListViewModel
     @State private var navigationPath = NavigationPath()
     
     var body: some View {
@@ -17,13 +17,13 @@ struct CharactersList: View {
                 switch viewModel.dataState {
                 case .loading:
                     loadingView
-                case .loaded(let characters):
-                    loadedView(characters)
+                case .loaded(let meteorites):
+                    loadedView(meteorites)
                 case .error(let error):
                     errorView(error)
                 }
             }
-            .navigationTitle("Characters")
+            .navigationTitle("Meteorites")
         }
         .onAppear {
             viewModel.didAppear()
@@ -34,12 +34,12 @@ struct CharactersList: View {
         ProgressView()
     }
     
-    private func loadedView(_ characters: [Person]) -> some View {
+    private func loadedView(_ meteorites: [Meteorite]) -> some View {
         ScrollView {
             LazyVStack(spacing: 24.0) {
-                ForEach(characters, id: \.self) { character in
-                    NavigationLink(value: character) {
-                        CharacterListItem(character: character)
+                ForEach(meteorites, id: \.self) { meteorite in
+                    NavigationLink(value: meteorite) {
+                        MeteoriteListItem(meteorite: meteorite)
                     }
                 }
             }
@@ -48,11 +48,11 @@ struct CharactersList: View {
         .refreshable {
             await viewModel.refresh()
         }
-        .navigationDestination(for: Person.self) { character in
-            CharacterDetail(
-                viewModel: CharacterDetailViewModel(
+        .navigationDestination(for: Meteorite.self) { meteorite in
+            MeteoriteDetail(
+                viewModel: MeteoriteDetailViewModel(
                     services: viewModel.services,
-                    character: character
+                    meteorite: meteorite
                 )
             )
         }
@@ -65,7 +65,7 @@ struct CharactersList: View {
 }
 
 #Preview {
-    CharactersList(
+    MeteoritesList(
         viewModel: .init(
             services: MockedServices()
         )

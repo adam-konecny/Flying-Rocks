@@ -1,18 +1,18 @@
 //
-//  CharactersListViewModel.swift
+//  MeteoritesListViewModel.swift
 //  Flying Rocks
 //
-//  Created by Adam Konečný on 06.11.2024.
+//  Created by Adam Konečný on 23.11.2024.
 //
 
 import SwiftUI
 
 @Observable
-class CharactersListViewModel: ViewModel {
+class MeteoritesListViewModel: ViewModel {
     @ObservationIgnored
     let services: any ServicesProtocol
     
-    var dataState: DataState<[Person]> = .loading
+    var dataState: DataState<[Meteorite]> = .loading
     
     init(services: any ServicesProtocol) {
         self.services = services
@@ -20,19 +20,19 @@ class CharactersListViewModel: ViewModel {
     
     func didAppear() {
         Task {
-            await loadCharacters()
+            await loadMeteorites()
         }
     }
     
     func refresh() async {
-        await loadCharacters()
+        await loadMeteorites()
     }
     
-    private func loadCharacters() async {
+    private func loadMeteorites() async {
         do {
-            let characters = try await services.apiService.getCharacters()
+            let meteorites = try await services.apiService.getMeteorites()
             
-            dataState = .loaded(characters)
+            dataState = .loaded(meteorites)
         } catch {
             dataState = .error(error)
         }
