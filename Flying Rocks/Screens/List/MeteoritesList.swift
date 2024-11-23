@@ -67,10 +67,19 @@ struct MeteoritesList: View {
     }
 }
 
-#Preview {
+#Preview("English") {
     MeteoritesList(
         viewModel: .init(
             services: MockedServices()
         )
     )
+}
+
+#Preview("Czech") {
+    MeteoritesList(
+        viewModel: .init(
+            services: MockedServices()
+        )
+    )
+    .environment(\.locale, Locale(identifier: "cs"))
 }
