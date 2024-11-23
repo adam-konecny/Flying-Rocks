@@ -24,10 +24,6 @@ class MeteoritesMapViewModel: ViewModel {
         }
     }
     
-    func refresh() async {
-        await loadMeteorites()
-    }
-    
     private func loadMeteorites() async {
         do {
             let meteorites = try await services.apiService.getMeteorites(page: .default).data

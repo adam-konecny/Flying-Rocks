@@ -5,6 +5,7 @@
 //  Created by Adam Konečný on 23.11.2024.
 //
 
+import MapKit
 import SwiftUI
 
 struct MeteoritesMap: View {
@@ -35,26 +36,13 @@ struct MeteoritesMap: View {
     }
     
     private func loadedView(_ meteorites: [Meteorite]) -> some View {
-        ScrollView {
-            LazyVStack(spacing: 24.0) {
-                ForEach(meteorites) { meteorite in
-                    NavigationLink(value: meteorite) {
-                        MeteoriteListItem(meteorite: meteorite)
-                    }
-                }
-            }
-            .padding()
-        }
-        .refreshable {
-            await viewModel.refresh()
-        }
-        .navigationDestination(for: Meteorite.self) { meteorite in
-            MeteoriteDetail(
-                viewModel: MeteoriteDetailViewModel(
-                    services: viewModel.services,
-                    meteorite: meteorite
+        Map {
+            ForEach(meteorites) { meteorite in
+                Marker(
+                    meteorite.name,
+                    coordinate: meteorite.location!.coordinate
                 )
-            )
+            }
         }
     }
     
