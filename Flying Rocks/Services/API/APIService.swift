@@ -15,17 +15,7 @@ class APIService: APIServiceProtocol {
     private var decoder: JSONDecoder = {
         let decoder = JSONDecoder()
         
-        decoder.dateDecodingStrategy = .custom{ decoder -> Date in
-            let container = try decoder.singleValueContainer()
-            
-            let dateString = try container.decode(String.self)
-            
-            guard let date = dateString.date(with: .apiDate) else {
-                throw AppError.wrongDateFormat
-            }
-            
-            return date
-        }
+        decoder.dateDecodingStrategy = .formatted(.apiDate)
         
         return decoder
     }()

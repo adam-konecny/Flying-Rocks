@@ -25,8 +25,8 @@ struct MeteoritesList: View {
             }
             .navigationTitle("Meteorites")
         }
-        .onAppear {
-            viewModel.didAppear()
+        .task {
+            await viewModel.loadMeteorites()
         }
     }
     
@@ -34,14 +34,14 @@ struct MeteoritesList: View {
         ProgressView()
     }
     
-    private func loadedView(_ meteorites: [Meteorite]) -> some View {
+    private func loadedView(_ meteorites: [MeteoriteFormatter]) -> some View {
         ScrollView {
             LazyVStack(spacing: 24.0) {
                 ForEach(meteorites) { meteorite in
                     NavigationLink(value: meteorite) {
                         MeteoriteListItem(meteorite: meteorite)
-                            .onAppear {
-                                viewModel.loadMore(currentItem: meteorite)
+                            .task {
+                                await viewModel.loadMore(currentItem: meteorite)
                             }
                     }
                 }
@@ -51,7 +51,7 @@ struct MeteoritesList: View {
         .refreshable {
             await viewModel.refresh()
         }
-        .navigationDestination(for: Meteorite.self) { meteorite in
+        .navigationDestination(for: MeteoriteFormatter.self) { meteorite in
             MeteoriteDetail(
                 viewModel: MeteoriteDetailViewModel(
                     services: viewModel.services,

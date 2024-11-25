@@ -12,23 +12,20 @@ class MeteoritesMapViewModel: ViewModel {
     @ObservationIgnored
     let services: any ServicesProtocol
     
-    var dataState: DataState<[Meteorite]> = .loading
+    var dataState: DataState<[MeteoriteFormatter]> = .loading
     
     init(services: any ServicesProtocol) {
         self.services = services
     }
     
-    func didAppear() {
-        Task {
-            await loadMeteorites()
-        }
-    }
-    
-    private func loadMeteorites() async {
+    func loadMeteorites() async {
         do {
-            let meteorites = try await services.apiService.getMeteorites(page: .default).data
+            let meteorites = try await services.apiService.getMeteorites(page: .init(limit: 200, offset: 0)).data
             
-            dataState = .loaded(meteorites)
+            // For simplicity I'm not using meteorites that are missing mass, date or location.
+            let filteredMeteorites = meteorites.compactMap { MeteoriteFormatter(meteorite: $0) }
+            
+            dataState = .loaded(filteredMeteorites)
         } catch {
             dataState = .error(error)
         }

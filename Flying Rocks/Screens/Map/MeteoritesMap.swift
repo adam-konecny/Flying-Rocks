@@ -26,8 +26,8 @@ struct MeteoritesMap: View {
             }
             .navigationTitle("Meteorites")
         }
-        .onAppear {
-            viewModel.didAppear()
+        .task {
+            await viewModel.loadMeteorites()
         }
     }
     
@@ -35,12 +35,12 @@ struct MeteoritesMap: View {
         ProgressView()
     }
     
-    private func loadedView(_ meteorites: [Meteorite]) -> some View {
+    private func loadedView(_ meteorites: [MeteoriteFormatter]) -> some View {
         Map {
             ForEach(meteorites) { meteorite in
                 Marker(
                     meteorite.name,
-                    coordinate: meteorite.location!.coordinate
+                    coordinate: meteorite.coordinate
                 )
             }
         }

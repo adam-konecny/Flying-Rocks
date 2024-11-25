@@ -9,7 +9,7 @@ import Kingfisher
 import SwiftUI
 
 struct MeteoriteListItem: View {
-    let meteorite: Meteorite
+    let meteorite: MeteoriteFormatter
     
     var body: some View {
         HStack {
@@ -46,17 +46,15 @@ struct MeteoriteListItem: View {
                 .font(.title3)
                 .foregroundColor(.primary)
             
-            if let location = meteorite.location {
-                Text("\(location.latitude) x \(location.longitude)")
+            Text(meteorite.readableCoordinates)
                     .font(.body)
                     .foregroundColor(.secondary)
-            }
             
-            Text(String(meteorite.mass ?? 0))
+            Text(meteorite.mass)
                 .font(.body)
                 .foregroundColor(.secondary)
             
-            Text(meteorite.date?.string(with: .dayMonthYear) ?? "TODO")
+            Text(meteorite.date)
                 .font(.subheadline)
                 .foregroundColor(.secondary)
         }
@@ -66,7 +64,7 @@ struct MeteoriteListItem: View {
 #Preview {
     VStack {
         MeteoriteListItem(
-            meteorite: .random
+            meteorite: MeteoriteFormatter(meteorite: .random)!
         )
     }
     .padding()

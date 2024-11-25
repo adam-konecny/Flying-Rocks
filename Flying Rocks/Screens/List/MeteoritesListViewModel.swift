@@ -12,19 +12,13 @@ class MeteoritesListViewModel: ViewModel {
     @ObservationIgnored
     let services: any ServicesProtocol
     
-    var dataState: DataState<[Meteorite]> = .loading
+    var dataState: DataState<[MeteoriteFormatter]> = .loading
     
     private var nextPage: Pagination? = .default
     private var isLoadingMore: Bool = false
     
     init(services: any ServicesProtocol) {
         self.services = services
-    }
-    
-    func didAppear() {
-        Task {
-            await loadMeteorites()
-        }
     }
     
     func refresh() async {
@@ -34,7 +28,7 @@ class MeteoritesListViewModel: ViewModel {
         await loadMeteorites()
     }
     
-    private func loadMeteorites() async {
+    func loadMeteorites() async {
         guard let firstPage = nextPage else {
             return
         }
@@ -42,14 +36,17 @@ class MeteoritesListViewModel: ViewModel {
         do {
             let response = try await services.apiService.getMeteorites(page: firstPage)
             
-            dataState = .loaded(response.data)
+            // For simplicity I'm not using meteorites that are missing mass, date or location.
+            let filteredMeteorites = response.data.compactMap { MeteoriteFormatter(meteorite: $0) }
+            
+            dataState = .loaded(filteredMeteorites)
             nextPage = response.nextPage
         } catch {
             dataState = .error(error)
         }
     }
     
-    func loadMore(currentItem: Meteorite) {
+    func loadMore(currentItem: MeteoriteFormatter) async {
         guard case .loaded(let items) = dataState else {
             return
         }
@@ -62,9 +59,7 @@ class MeteoritesListViewModel: ViewModel {
             return
         }
         
-        Task {
-            await startLoadingNextPage(nextPage)
-        }
+        await startLoadingNextPage(nextPage)
     }
     
     private func startLoadingNextPage(_ nextPage: Pagination) async {
@@ -77,7 +72,10 @@ class MeteoritesListViewModel: ViewModel {
                 return
             }
             
-            dataState = .loaded(items + response.data)
+            // For simplicity I'm not using meteorites that are missing mass, date or location.
+            let filteredMeteorites = response.data.compactMap { MeteoriteFormatter(meteorite: $0) }
+            
+            dataState = .loaded(items + filteredMeteorites)
             self.nextPage = response.nextPage
             
             isLoadingMore = false

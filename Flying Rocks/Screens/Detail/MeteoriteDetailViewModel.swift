@@ -13,9 +13,9 @@ class MeteoriteDetailViewModel: ViewModel {
     let services: any ServicesProtocol
     
     @ObservationIgnored
-    let meteorite: Meteorite
+    let meteorite: MeteoriteFormatter
     
-    init(services: any ServicesProtocol, meteorite: Meteorite) {
+    init(services: any ServicesProtocol, meteorite: MeteoriteFormatter) {
         self.services = services
         self.meteorite = meteorite
     }

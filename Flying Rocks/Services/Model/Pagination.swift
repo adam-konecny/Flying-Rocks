@@ -13,7 +13,7 @@ struct Pagination {
     
     static var `default`: Self {
         .init(
-            limit: 10,
+            limit: 20,
             offset: 0
         )
     }

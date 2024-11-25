@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Meteorite: Decodable, Identifiable, Hashable {
+struct Meteorite: Decodable {
     let id: String
     let name: String
     let mass: Int?
@@ -47,11 +47,7 @@ struct Meteorite: Decodable, Identifiable, Hashable {
             self.mass = nil
         }
         
-        if let date = try container.decodeIfPresent(Date.self, forKey: .date) {
-            self.date = date
-        } else {
-            self.date = nil
-        }
+        self.date = try container.decodeIfPresent(Date.self, forKey: .date)
         
         if let latitude = try container.decodeIfPresent(String.self, forKey: .latitude), let longitude = try container.decodeIfPresent(String.self, forKey: .longitude) {
             self.location = Location(

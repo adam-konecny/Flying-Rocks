@@ -40,7 +40,7 @@ struct MeteoriteDetail: View {
     MeteoriteDetail(
         viewModel: MeteoriteDetailViewModel(
             services: MockedServices(),
-            meteorite: .random
+            meteorite: MeteoriteFormatter(meteorite: .random)!
         )
     )
 }
