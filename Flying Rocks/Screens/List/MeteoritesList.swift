@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct MeteoritesList: View {
-    @State var viewModel: MeteoritesListViewModel
+    @State var viewModel: MeteoritesListViewModelProtocol
     @State private var navigationPath = NavigationPath()
     
     private let columns = [
@@ -38,7 +38,7 @@ struct MeteoritesList: View {
         ProgressView()
     }
     
-    private func loadedView(_ meteorites: [MeteoriteFormatter]) -> some View {
+    private func loadedView(_ meteorites: [MeteoriteDecorator]) -> some View {
         ScrollView {
             LazyVGrid(columns: columns, spacing: 12.0) {
                 ForEach(meteorites) { meteorite in
@@ -56,13 +56,8 @@ struct MeteoritesList: View {
         .refreshable {
             await viewModel.refresh()
         }
-        .navigationDestination(for: MeteoriteFormatter.self) { meteorite in
-            MeteoriteDetail(
-                viewModel: MeteoriteDetailViewModel(
-                    services: viewModel.services,
-                    meteorite: meteorite
-                )
-            )
+        .navigationDestination(for: MeteoriteDecorator.self) { meteorite in
+            viewModel.detailView(for: meteorite)
         }
     }
     
@@ -74,26 +69,20 @@ struct MeteoritesList: View {
 
 #Preview("English") {
     MeteoritesList(
-        viewModel: .init(
-            services: MockedServices()
-        )
+        viewModel: MeteoritesListViewModel.mocked
     )
 }
 
 #Preview("English Dark") {
     MeteoritesList(
-        viewModel: .init(
-            services: MockedServices()
-        )
+        viewModel: MeteoritesListViewModel.mocked
     )
     .environment(\.colorScheme, .dark)
 }
 
 #Preview("Czech") {
     MeteoritesList(
-        viewModel: .init(
-            services: MockedServices()
-        )
+        viewModel: MeteoritesListViewModel.mocked
     )
     .environment(\.locale, Locale(identifier: "cs"))
 }

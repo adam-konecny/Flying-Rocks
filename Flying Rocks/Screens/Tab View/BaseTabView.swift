@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct BaseTabView: View {
-    let services: any ServicesProtocol
+    let services: Services
     
     var body: some View {
         TabView {

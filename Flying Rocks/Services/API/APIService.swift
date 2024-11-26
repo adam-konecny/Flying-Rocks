@@ -9,7 +9,7 @@ import Alamofire
 import Helpers
 import Foundation
 
-class APIService: APIServiceProtocol {
+final class APIService: APIServiceProtocol {
     let configuration: Configuration
     
     private var decoder: JSONDecoder = {

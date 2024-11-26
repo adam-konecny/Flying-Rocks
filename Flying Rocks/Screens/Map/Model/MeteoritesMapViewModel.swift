@@ -8,13 +8,13 @@
 import SwiftUI
 
 @Observable
-class MeteoritesMapViewModel: ViewModel {
+final class MeteoritesMapViewModel: MeteoritesMapViewModelProtocol {
     @ObservationIgnored
-    let services: any ServicesProtocol
+    let services: Services
     
-    var dataState: DataState<[MeteoriteFormatter]> = .loading
+    var dataState: DataState<[MeteoriteDecorator]> = .loading
     
-    init(services: any ServicesProtocol) {
+    init(services: Services) {
         self.services = services
     }
     
@@ -23,11 +23,17 @@ class MeteoritesMapViewModel: ViewModel {
             let meteorites = try await services.apiService.getMeteorites(page: .init(limit: 200, offset: 0)).data
             
             // For simplicity I'm not using meteorites that are missing mass, date or location.
-            let filteredMeteorites = meteorites.compactMap { MeteoriteFormatter(meteorite: $0) }
+            let filteredMeteorites = meteorites.compactMap { MeteoriteDecorator(meteorite: $0) }
             
             dataState = .loaded(filteredMeteorites)
         } catch {
             dataState = .error(error)
         }
+    }
+}
+
+extension MeteoritesMapViewModel {
+    static var mocked: MeteoritesMapViewModel {
+        MeteoritesMapViewModel(services: .mocked)
     }
 }

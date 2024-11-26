@@ -9,7 +9,7 @@ import Kingfisher
 import SwiftUI
 
 struct MeteoriteDetail: View {
-    @State var viewModel: MeteoriteDetailViewModel
+    @State var viewModel: MeteoriteDetailViewModelProtocol
     
     var body: some View {
         ScrollView {
@@ -38,9 +38,6 @@ struct MeteoriteDetail: View {
 
 #Preview {
     MeteoriteDetail(
-        viewModel: MeteoriteDetailViewModel(
-            services: MockedServices(),
-            meteorite: MeteoriteFormatter(meteorite: .random)!
-        )
+        viewModel: MeteoriteDetailViewModel.mocked
     )
 }

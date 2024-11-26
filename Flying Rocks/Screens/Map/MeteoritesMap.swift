@@ -9,7 +9,7 @@ import MapKit
 import SwiftUI
 
 struct MeteoritesMap: View {
-    @State var viewModel: MeteoritesMapViewModel
+    @State var viewModel: MeteoritesMapViewModelProtocol
     @State private var navigationPath = NavigationPath()
     
     var body: some View {
@@ -35,7 +35,7 @@ struct MeteoritesMap: View {
         ProgressView()
     }
     
-    private func loadedView(_ meteorites: [MeteoriteFormatter]) -> some View {
+    private func loadedView(_ meteorites: [MeteoriteDecorator]) -> some View {
         Map {
             ForEach(meteorites) { meteorite in
                 Marker(
@@ -54,8 +54,6 @@ struct MeteoritesMap: View {
 
 #Preview {
     MeteoritesMap(
-        viewModel: .init(
-            services: MockedServices()
-        )
+        viewModel: MeteoritesMapViewModel.mocked
     )
 }

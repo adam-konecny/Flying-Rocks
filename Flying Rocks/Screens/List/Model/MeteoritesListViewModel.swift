@@ -8,16 +8,16 @@
 import SwiftUI
 
 @Observable
-class MeteoritesListViewModel: ViewModel {
+final class MeteoritesListViewModel: MeteoritesListViewModelProtocol {
     @ObservationIgnored
-    let services: any ServicesProtocol
+    let services: Services
     
-    var dataState: DataState<[MeteoriteFormatter]> = .loading
+    var dataState: DataState<[MeteoriteDecorator]> = .loading
     
     private var nextPage: Pagination? = .default
     private var isLoadingMore: Bool = false
     
-    init(services: any ServicesProtocol) {
+    init(services: Services) {
         self.services = services
     }
     
@@ -37,7 +37,7 @@ class MeteoritesListViewModel: ViewModel {
             let response = try await services.apiService.getMeteorites(page: firstPage)
             
             // For simplicity I'm not using meteorites that are missing mass, date or location.
-            let filteredMeteorites = response.data.compactMap { MeteoriteFormatter(meteorite: $0) }
+            let filteredMeteorites = response.data.compactMap { MeteoriteDecorator(meteorite: $0) }
             
             dataState = .loaded(filteredMeteorites)
             nextPage = response.nextPage
@@ -46,7 +46,7 @@ class MeteoritesListViewModel: ViewModel {
         }
     }
     
-    func loadMore(currentItem: MeteoriteFormatter) async {
+    func loadMore(currentItem: MeteoriteDecorator) async {
         guard case .loaded(let items) = dataState else {
             return
         }
@@ -73,7 +73,7 @@ class MeteoritesListViewModel: ViewModel {
             }
             
             // For simplicity I'm not using meteorites that are missing mass, date or location.
-            let filteredMeteorites = response.data.compactMap { MeteoriteFormatter(meteorite: $0) }
+            let filteredMeteorites = response.data.compactMap { MeteoriteDecorator(meteorite: $0) }
             
             dataState = .loaded(items + filteredMeteorites)
             self.nextPage = response.nextPage
@@ -84,5 +84,20 @@ class MeteoritesListViewModel: ViewModel {
         }
         
         isLoadingMore = false
+    }
+    
+    func detailView(for meteorite: MeteoriteDecorator) -> MeteoriteDetail {
+        MeteoriteDetail(
+            viewModel: MeteoriteDetailViewModel(
+                services: services,
+                meteorite: meteorite
+            )
+        )
+    }
+}
+
+extension MeteoritesListViewModel {
+    static var mocked: Self {
+        .init(services: .mocked)
     }
 }

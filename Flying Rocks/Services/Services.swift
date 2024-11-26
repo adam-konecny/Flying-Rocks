@@ -7,12 +7,22 @@
 
 import Foundation
 
-class Services: ServicesProtocol {
-    let apiService: APIService
+final class Services {
+    let apiService: APIServiceProtocol
+    
+    private init(apiService: APIServiceProtocol) {
+        self.apiService = apiService
+    }
     
     init(configuration: Configuration) {
         self.apiService = APIService(
             configuration: configuration
         )
+    }
+}
+
+extension Services {
+    static var mocked: Services {
+        .init(apiService: MockedAPIService())
     }
 }

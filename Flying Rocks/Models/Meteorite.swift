@@ -32,7 +32,6 @@ struct Meteorite: Decodable {
             latitude: latitude,
             longitude: longitude
         )
-        
     }
     
     init(from decoder: any Decoder) throws {
@@ -57,23 +56,5 @@ struct Meteorite: Decodable {
         } else {
             self.location = nil
         }
-    }
-    
-    static var random: Self {
-        .init(
-            id: UUID().uuidString,
-            name: [
-                "Apple",
-                "Orange",
-                "Eggplant",
-                "Banana",
-                "Watermelon",
-                "Pineapple"
-            ].randomElement()!,
-            mass: Int.random(in: (200...50_000)),
-            date: Date(timeIntervalSinceNow: -Double.random(in: 50_000...1_500_000)),
-            latitude: 49.194797 + Double.random(in: -1.5...1.5),
-            longitude: 16.6079453 + Double.random(in: -1.5...1.5)
-        )
     }
 }

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		660DFC232CF20A6200CA5592 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 660DFC222CF20A6200CA5592 /* Alamofire */; };
 		660DFC482CF2590700CA5592 /* Helpers in Frameworks */ = {isa = PBXBuildFile; productRef = 660DFC472CF2590700CA5592 /* Helpers */; };
+		66DFB4342CF60466004B8EF4 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 66DFB4332CF60466004B8EF4 /* Kingfisher */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +30,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				66DFB4342CF60466004B8EF4 /* Kingfisher in Frameworks */,
 				660DFC482CF2590700CA5592 /* Helpers in Frameworks */,
 				660DFC232CF20A6200CA5592 /* Alamofire in Frameworks */,
 			);
@@ -84,6 +86,7 @@
 			packageProductDependencies = (
 				660DFC222CF20A6200CA5592 /* Alamofire */,
 				660DFC472CF2590700CA5592 /* Helpers */,
+				66DFB4332CF60466004B8EF4 /* Kingfisher */,
 			);
 			productName = "Flying Rocks";
 			productReference = 6642BB832CF2062500AD326D /* Flying Rocks.app */;
@@ -117,6 +120,7 @@
 			packageReferences = (
 				660DFC212CF20A6200CA5592 /* XCRemoteSwiftPackageReference "Alamofire" */,
 				660DFC432CF2575C00CA5592 /* XCLocalSwiftPackageReference "Modules" */,
+				66DFB4322CF60466004B8EF4 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 6642BB842CF2062500AD326D /* Products */;
@@ -367,6 +371,14 @@
 				minimumVersion = 5.10.1;
 			};
 		};
+		66DFB4322CF60466004B8EF4 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 8.1.1;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -378,6 +390,11 @@
 		660DFC472CF2590700CA5592 /* Helpers */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Helpers;
+		};
+		66DFB4332CF60466004B8EF4 /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 66DFB4322CF60466004B8EF4 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

@@ -1,5 +1,5 @@
 //
-//  MeteoriteFormatter.swift
+//  MeteoriteDecorator.swift
 //  Flying Rocks
 //
 //  Created by Adam Konečný on 24.11.2024.
@@ -9,7 +9,7 @@ import Foundation
 import Helpers
 import MapKit
 
-struct MeteoriteFormatter: Identifiable, Hashable {
+struct MeteoriteDecorator: Identifiable, Hashable {
     let id: String
     let name: String
     let mass: String
@@ -44,7 +44,7 @@ struct MeteoriteFormatter: Identifiable, Hashable {
         self.readableCoordinates = CoordinatesToDMS.readable(from: coordinate)
     }
     
-    static func == (lhs: MeteoriteFormatter, rhs: MeteoriteFormatter) -> Bool {
+    static func == (lhs: MeteoriteDecorator, rhs: MeteoriteDecorator) -> Bool {
         lhs.id == rhs.id
     }
     
@@ -53,5 +53,11 @@ struct MeteoriteFormatter: Identifiable, Hashable {
         hasher.combine(name)
         hasher.combine(mass)
         hasher.combine(date)
+    }
+}
+
+extension MeteoriteDecorator {
+    static var mocked: MeteoriteDecorator {
+        .init(meteorite: .mocked)!
     }
 }
