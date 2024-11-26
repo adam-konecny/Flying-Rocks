@@ -13,59 +13,77 @@ struct MeteoriteListItem: View {
     
     var body: some View {
         HStack {
-//            imageView
-            
             infoView
             
             Spacer()
         }
         .padding()
         .background {
-            RoundedRectangle(cornerRadius: 16.0)
-                .fill(Color.white)
-                .shadow(color: Color.black.opacity(0.2), radius: 4.0)
+            MeshGradient(width: 2, height: 2, points: [
+                [0, 0], [1, 0],
+                [0, 1], [1, 1]
+            ], colors: [
+                .listBackground, .listBackground,
+                .listBackground, .listBackgroundSecondary
+            ])
+            .clipShape(.rect(cornerRadius: 16.0))
+//                .fill(Color(.listBackground))
+                .shadow(color: Color.black.opacity(0.2), radius: 1.5)
         }
     }
-    
-//    private var imageView: some View {
-//        KFImage
-//            .url(URL(string: meteorite.image)!)
-//            .placeholder {
-//                Color.gray.opacity(0.2)
-//                    .overlay(Image(systemName: "person"))
-//            }
-//            .resizable()
-//            .aspectRatio(contentMode: .fill)
-//            .frame(width: 80.0)
-//            .clipShape(.rect(cornerRadius: 8.0))
-//    }
     
     private var infoView: some View {
         VStack(alignment: .leading) {
             Text(meteorite.name)
-                .font(.title3)
+                .font(.title2)
                 .foregroundColor(.primary)
             
-            Text(meteorite.readableCoordinates)
-                    .font(.body)
-                    .foregroundColor(.secondary)
+            Label {
+                Text(meteorite.readableCoordinates)
+                        .font(.body)
+            } icon: {
+                Image(systemName: "mappin.and.ellipse")
+            }
+            .foregroundColor(.secondary)
             
-            Text(meteorite.mass)
-                .font(.body)
+            HStack {
+                Label {
+                    Text(meteorite.mass)
+                        .font(.body)
+                } icon: {
+                    Image(systemName: "scalemass")
+                }
                 .foregroundColor(.secondary)
-            
-            Text(meteorite.date)
-                .font(.subheadline)
+                
+                Spacer()
+                
+                Label {
+                    Text(meteorite.date)
+                        .font(.subheadline)
+                } icon: {
+                    Image(systemName: "clock")
+                }
                 .foregroundColor(.secondary)
+            }
         }
     }
 }
 
-#Preview {
+#Preview("Light") {
     VStack {
         MeteoriteListItem(
             meteorite: MeteoriteFormatter(meteorite: .random)!
         )
     }
     .padding()
+}
+
+#Preview("Dark") {
+    VStack {
+        MeteoriteListItem(
+            meteorite: MeteoriteFormatter(meteorite: .random)!
+        )
+    }
+    .padding()
+    .environment(\.colorScheme, .dark)
 }

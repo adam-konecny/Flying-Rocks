@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		660DFC232CF20A6200CA5592 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 660DFC222CF20A6200CA5592 /* Alamofire */; };
-		660DFC262CF20A7600CA5592 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 660DFC252CF20A7600CA5592 /* Kingfisher */; };
 		660DFC482CF2590700CA5592 /* Helpers in Frameworks */ = {isa = PBXBuildFile; productRef = 660DFC472CF2590700CA5592 /* Helpers */; };
 /* End PBXBuildFile section */
 
@@ -31,7 +30,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				660DFC482CF2590700CA5592 /* Helpers in Frameworks */,
-				660DFC262CF20A7600CA5592 /* Kingfisher in Frameworks */,
 				660DFC232CF20A6200CA5592 /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -85,7 +83,6 @@
 			name = "Flying Rocks";
 			packageProductDependencies = (
 				660DFC222CF20A6200CA5592 /* Alamofire */,
-				660DFC252CF20A7600CA5592 /* Kingfisher */,
 				660DFC472CF2590700CA5592 /* Helpers */,
 			);
 			productName = "Flying Rocks";
@@ -119,7 +116,6 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				660DFC212CF20A6200CA5592 /* XCRemoteSwiftPackageReference "Alamofire" */,
-				660DFC242CF20A7600CA5592 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				660DFC432CF2575C00CA5592 /* XCLocalSwiftPackageReference "Modules" */,
 			);
 			preferredProjectObjectVersion = 77;
@@ -371,14 +367,6 @@
 				minimumVersion = 5.10.1;
 			};
 		};
-		660DFC242CF20A7600CA5592 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/onevcat/Kingfisher";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 8.1.1;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -386,11 +374,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 660DFC212CF20A6200CA5592 /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = Alamofire;
-		};
-		660DFC252CF20A7600CA5592 /* Kingfisher */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 660DFC242CF20A7600CA5592 /* XCRemoteSwiftPackageReference "Kingfisher" */;
-			productName = Kingfisher;
 		};
 		660DFC472CF2590700CA5592 /* Helpers */ = {
 			isa = XCSwiftPackageProductDependency;

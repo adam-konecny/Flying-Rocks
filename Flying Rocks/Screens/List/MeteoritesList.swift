@@ -11,6 +11,10 @@ struct MeteoritesList: View {
     @State var viewModel: MeteoritesListViewModel
     @State private var navigationPath = NavigationPath()
     
+    private let columns = [
+        GridItem(.adaptive(minimum: 240.0), spacing: 12.0)
+    ]
+    
     var body: some View {
         NavigationStack(path: $navigationPath) {
             Group {
@@ -36,7 +40,7 @@ struct MeteoritesList: View {
     
     private func loadedView(_ meteorites: [MeteoriteFormatter]) -> some View {
         ScrollView {
-            LazyVStack(spacing: 24.0) {
+            LazyVGrid(columns: columns, spacing: 12.0) {
                 ForEach(meteorites) { meteorite in
                     NavigationLink(value: meteorite) {
                         MeteoriteListItem(meteorite: meteorite)
@@ -48,6 +52,7 @@ struct MeteoritesList: View {
             }
             .padding()
         }
+        .background(Color.background)
         .refreshable {
             await viewModel.refresh()
         }
@@ -73,6 +78,15 @@ struct MeteoritesList: View {
             services: MockedServices()
         )
     )
+}
+
+#Preview("English Dark") {
+    MeteoritesList(
+        viewModel: .init(
+            services: MockedServices()
+        )
+    )
+    .environment(\.colorScheme, .dark)
 }
 
 #Preview("Czech") {

@@ -77,10 +77,12 @@ class MeteoritesListViewModel: ViewModel {
             
             dataState = .loaded(items + filteredMeteorites)
             self.nextPage = response.nextPage
-            
-            isLoadingMore = false
         } catch {
-            dataState = .error(error)
+//            dataState = .error(error)
+            
+            #warning("Show unobtrusive error.")
         }
+        
+        isLoadingMore = false
     }
 }
