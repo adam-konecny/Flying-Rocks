@@ -17,7 +17,7 @@ struct BaseTabView: View {
                     Label {
                         Text("Meteorites")
                     } icon: {
-                        Image(systemName: "list.bullet")
+                        Image(.tabFire24)
                     }
                 }
             
@@ -26,7 +26,7 @@ struct BaseTabView: View {
                     Label {
                         Text("Map")
                     } icon: {
-                        Image(systemName: "map")
+                        Image(.tabMap24)
                     }
                 }
         }
