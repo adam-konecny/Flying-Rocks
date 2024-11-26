@@ -19,4 +19,15 @@ final class MockedAPIService: APIServiceProtocol {
             currentPage: page
         )
     }
+    
+    func getMeteorites(latitude: Double, longitude: Double) async throws -> [Meteorite] {
+        [
+            .mocked,
+            .mocked,
+            .mocked,
+            .mocked,
+            .mocked,
+            .mocked
+        ]
+    }
 }

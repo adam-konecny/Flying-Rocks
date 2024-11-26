@@ -1,6 +1,16 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "Enable location" : {
+      "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Povolit polohu"
+          }
+        }
+      }
+    },
     "Map" : {
       "localizations" : {
         "cs" : {

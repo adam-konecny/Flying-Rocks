@@ -10,6 +10,7 @@
 		660DFC232CF20A6200CA5592 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 660DFC222CF20A6200CA5592 /* Alamofire */; };
 		660DFC482CF2590700CA5592 /* Helpers in Frameworks */ = {isa = PBXBuildFile; productRef = 660DFC472CF2590700CA5592 /* Helpers */; };
 		66DFB4342CF60466004B8EF4 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 66DFB4332CF60466004B8EF4 /* Kingfisher */; };
+		66DFB43E2CF62247004B8EF4 /* Location in Frameworks */ = {isa = PBXBuildFile; productRef = 66DFB43D2CF62247004B8EF4 /* Location */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +32,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				66DFB4342CF60466004B8EF4 /* Kingfisher in Frameworks */,
+				66DFB43E2CF62247004B8EF4 /* Location in Frameworks */,
 				660DFC482CF2590700CA5592 /* Helpers in Frameworks */,
 				660DFC232CF20A6200CA5592 /* Alamofire in Frameworks */,
 			);
@@ -87,6 +89,7 @@
 				660DFC222CF20A6200CA5592 /* Alamofire */,
 				660DFC472CF2590700CA5592 /* Helpers */,
 				66DFB4332CF60466004B8EF4 /* Kingfisher */,
+				66DFB43D2CF62247004B8EF4 /* Location */,
 			);
 			productName = "Flying Rocks";
 			productReference = 6642BB832CF2062500AD326D /* Flying Rocks.app */;
@@ -284,6 +287,7 @@
 				DEVELOPMENT_TEAM = 63Q2F6D34U;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "See all the meteorites around you!";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -313,6 +317,7 @@
 				DEVELOPMENT_TEAM = 63Q2F6D34U;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "See all the meteorites around you!";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -395,6 +400,10 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 66DFB4322CF60466004B8EF4 /* XCRemoteSwiftPackageReference "Kingfisher" */;
 			productName = Kingfisher;
+		};
+		66DFB43D2CF62247004B8EF4 /* Location */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Location;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

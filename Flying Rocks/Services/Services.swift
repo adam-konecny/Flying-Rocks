@@ -8,13 +8,16 @@
 import Foundation
 
 final class Services {
+    let configuration: Configuration
     let apiService: APIServiceProtocol
     
-    private init(apiService: APIServiceProtocol) {
+    private init(configuration: Configuration, apiService: APIServiceProtocol) {
+        self.configuration = configuration
         self.apiService = apiService
     }
     
     init(configuration: Configuration) {
+        self.configuration = configuration
         self.apiService = APIService(
             configuration: configuration
         )
@@ -23,6 +26,9 @@ final class Services {
 
 extension Services {
     static var mocked: Services {
-        .init(apiService: MockedAPIService())
+        .init(
+            configuration: .production,
+            apiService: MockedAPIService()
+        )
     }
 }

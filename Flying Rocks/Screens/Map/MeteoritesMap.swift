@@ -10,21 +10,23 @@ import SwiftUI
 
 struct MeteoritesMap: View {
     @State var viewModel: MeteoritesMapViewModelProtocol
-    @State private var navigationPath = NavigationPath()
     
     var body: some View {
-        NavigationStack(path: $navigationPath) {
-            Group {
-                switch viewModel.dataState {
-                case .loading:
-                    loadingView
-                case .loaded(let meteorites):
-                    loadedView(meteorites)
-                case .error(let error):
-                    errorView(error)
-                }
+        ZStack {
+            switch viewModel.dataState {
+            case .loading:
+                loadingView
+            case .loaded(let meteorites):
+                loadedView(meteorites)
+            case .error(let error):
+                errorView(error)
             }
-            .navigationTitle("Meteorites")
+            
+            if viewModel.showAuthorizationButton {
+                locationButton
+                    .frame(maxHeight: .infinity, alignment: .top)
+                    .padding(.top)
+            }
         }
         .task {
             await viewModel.loadMeteorites()
@@ -36,12 +38,20 @@ struct MeteoritesMap: View {
     }
     
     private func loadedView(_ meteorites: [MeteoriteDecorator]) -> some View {
-        Map {
+        Map(position: $viewModel.position) {
+            UserAnnotation()
+            
             ForEach(meteorites) { meteorite in
-                Marker(
-                    meteorite.name,
-                    coordinate: meteorite.coordinate
-                )
+                Annotation(meteorite.name, coordinate: meteorite.coordinate) {
+                    Text(meteorite.id)
+                        .font(.body)
+                        .bold()
+                        .padding(6.0)
+                        .background(.black)
+                        .foregroundStyle(.white)
+                        .clipShape(.capsule)
+                }
+                .annotationTitles(.hidden)
             }
         }
     }
@@ -49,6 +59,23 @@ struct MeteoritesMap: View {
     private func errorView(_ error: Error) -> some View {
         Text(error.localizedDescription)
             .padding()
+    }
+    
+    private var locationButton: some View {
+        Button {
+            viewModel.askForLocationAuthorization()
+        } label: {
+            Label(title: {
+                Text("Enable location")
+            }, icon: {
+                Image(systemName: "location.fill")
+            })
+            .padding(8.0)
+            .background(Color.blue)
+            .foregroundStyle(Color.white)
+            .clipShape(.capsule)
+            .shadow(radius: 2.0)
+        }
     }
 }
 

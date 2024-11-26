@@ -38,19 +38,35 @@ final class APIService: APIServiceProtocol {
         }
     }
     
-    private func buildURL(page: Pagination) -> String {
-        configuration.baseUrl + "?$limit=\(page.limit)&$offset=\(page.offset)"
+    private func buildURL(page: Pagination, location: Location?) -> String {
+        var url = configuration.baseUrl + "?$limit=\(page.limit)&$offset=\(page.offset)"
+        
+        if let location {
+            url += "&$where=within_circle(geolocation, \(location.latitude), \(location.longitude), 300000)"
+        }
+        
+        return url
     }
     
     func getMeteorites(page: Pagination) async throws -> PaginatedList<Meteorite> {
         let data = try await makeRequest(
-            url: buildURL(page: page),
+            url: buildURL(page: page, location: nil),
             type: [Meteorite].self
         )
         
         return PaginatedList(
             data: data,
             currentPage: page
+        )
+    }
+    
+    func getMeteorites(latitude: Double, longitude: Double) async throws -> [Meteorite] {
+        try await makeRequest(
+            url: buildURL(
+                page: .init(limit: 50, offset: 0),
+                location: .init(latitude: latitude, longitude: longitude)
+            ),
+            type: [Meteorite].self
         )
     }
 }
