@@ -14,7 +14,15 @@ struct MeteoriteDetail: View {
     var body: some View {
         ScrollView {
             VStack {
-//                imageView
+                imageView
+                
+                Label {
+                    Text(viewModel.meteorite.readableCoordinates)
+                } icon: {
+                    Image(systemName: "mappin.and.ellipse")
+                }
+                .font(.body)
+                .foregroundColor(.secondary)
             }
             .padding()
         }
@@ -22,18 +30,18 @@ struct MeteoriteDetail: View {
         .toolbar(.hidden, for: .tabBar)
     }
     
-//    private var imageView: some View {
-//        KFImage
-//            .url(URL(string: viewModel.meteorite.image)!)
-//            .placeholder {
-//                Color.gray.opacity(0.2)
-//                    .overlay(Image(systemName: "person"))
-//            }
-//            .resizable()
-//            .aspectRatio(contentMode: .fill)
-//            .frame(width: 160.0)
-//            .clipShape(.rect(cornerRadius: 16.0))
-//    }
+    private var imageView: some View {
+        KFImage
+            .url(URL(string: viewModel.meteorite.imageUrl))
+            .placeholder {
+                Color.gray.opacity(0.2)
+                    .overlay(Image(systemName: "questionmark.circle"))
+            }
+            .resizable()
+            .aspectRatio(contentMode: .fill)
+            .frame(width: 160.0)
+            .clipShape(.rect(cornerRadius: 16.0))
+    }
 }
 
 #Preview {
