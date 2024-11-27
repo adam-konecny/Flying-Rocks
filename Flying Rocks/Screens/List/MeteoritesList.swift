@@ -45,6 +45,7 @@ struct MeteoritesList: View {
                     NavigationLink(value: meteorite) {
                         MeteoriteListItem(meteorite: meteorite)
                     }
+                    .buttonStyle(.plain)
                     .task {
                         await viewModel.loadMore(currentItem: meteorite)
                     }

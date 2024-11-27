@@ -60,7 +60,7 @@ struct MeteoriteListItem: View {
         VStack(alignment: .leading, spacing: 8.0) {
             Text(meteorite.name)
                 .font(.title2)
-                .foregroundColor(.primary)
+                .foregroundStyle(.primary)
             
             VStack(alignment: .leading) {
                 Label {
@@ -69,7 +69,7 @@ struct MeteoriteListItem: View {
                     Image(systemName: "scalemass")
                 }
                 .font(.body)
-                .foregroundColor(.secondary)
+                .foregroundStyle(.secondary)
                 
                 Label {
                     Text(meteorite.date)
@@ -77,7 +77,7 @@ struct MeteoriteListItem: View {
                     Image(systemName: "clock")
                 }
                 .font(.subheadline)
-                .foregroundColor(.secondary)
+                .foregroundStyle(.secondary)
             }
         }
     }

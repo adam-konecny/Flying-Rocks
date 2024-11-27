@@ -10,22 +10,41 @@ import SwiftUI
 
 struct MeteoriteDetail: View {
     @State var viewModel: MeteoriteDetailViewModelProtocol
+    @State var scrollViewOffsetY: Double = 0.0
     
     var body: some View {
+        #warning("Fix: Navigation is too dark in contrast to the image")
+        
         ScrollView {
+            imageView
+            
             VStack {
-                imageView
+                MeteoriteInfoItemView(
+                    image: "mappin.and.ellipse",
+                    title: "Location",
+                    value: viewModel.meteorite.readableCoordinates
+                )
                 
-                Label {
-                    Text(viewModel.meteorite.readableCoordinates)
-                } icon: {
-                    Image(systemName: "mappin.and.ellipse")
-                }
-                .font(.body)
-                .foregroundColor(.secondary)
+                MeteoriteInfoItemView(
+                    image: "scalemass",
+                    title: "Mass",
+                    value: viewModel.meteorite.mass
+                )
+                
+                MeteoriteInfoItemView(
+                    image: "clock",
+                    title: "Landed",
+                    value: viewModel.meteorite.date
+                )
             }
             .padding()
         }
+        .onScrollGeometryChange(for: Double.self) { geometry in
+            geometry.contentOffset.y
+        } action: { _, newValue in
+            scrollViewOffsetY = newValue
+        }
+        .ignoresSafeArea(edges: .top)
         .navigationTitle(viewModel.meteorite.name)
         .toolbar(.hidden, for: .tabBar)
     }
@@ -39,8 +58,8 @@ struct MeteoriteDetail: View {
             }
             .resizable()
             .aspectRatio(contentMode: .fill)
-            .frame(width: 160.0)
-            .clipShape(.rect(cornerRadius: 16.0))
+            .frame(maxWidth: .infinity)
+            .offset(y: scrollViewOffsetY <= 0.0 ? scrollViewOffsetY : 0.0)
     }
 }
 

@@ -11,6 +11,8 @@ import SwiftUI
 struct MeteoritesMap: View {
     @State var viewModel: MeteoritesMapViewModelProtocol
     
+    @State var selectedMeteorite: MeteoriteDecorator?
+    
     var body: some View {
         ZStack {
             switch viewModel.dataState {
@@ -28,6 +30,10 @@ struct MeteoritesMap: View {
                     .padding(.top)
             }
         }
+        .sheet(item: $selectedMeteorite) {
+            viewModel.detailView(for: $0)
+                .presentationDetents([.medium, .large])
+        }
         .task {
             await viewModel.loadMeteorites()
         }
@@ -43,13 +49,17 @@ struct MeteoritesMap: View {
             
             ForEach(meteorites) { meteorite in
                 Annotation(meteorite.name, coordinate: meteorite.coordinate) {
-                    Text(meteorite.id)
-                        .font(.body)
-                        .bold()
-                        .padding(6.0)
-                        .background(.black)
-                        .foregroundStyle(.white)
-                        .clipShape(.capsule)
+                    Button {
+                        selectedMeteorite = meteorite
+                    } label: {
+                        Text(meteorite.id)
+                            .font(.body)
+                            .bold()
+                            .padding(6.0)
+                            .background(.black)
+                            .foregroundStyle(.white)
+                            .clipShape(.capsule)
+                    }
                 }
                 .annotationTitles(.hidden)
             }

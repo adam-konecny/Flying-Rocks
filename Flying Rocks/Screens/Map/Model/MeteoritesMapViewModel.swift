@@ -84,6 +84,15 @@ final class MeteoritesMapViewModel: MeteoritesMapViewModelProtocol {
         
         locationManager.askForLocationAuthorization()
     }
+    
+    func detailView(for meteorite: MeteoriteDecorator) -> MeteoriteDetail {
+        MeteoriteDetail(
+            viewModel: MeteoriteDetailViewModel(
+                services: services,
+                meteorite: meteorite
+            )
+        )
+    }
 }
 
 extension MeteoritesMapViewModel {

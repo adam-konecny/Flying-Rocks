@@ -15,4 +15,6 @@ protocol MeteoritesMapViewModelProtocol {
     
     func loadMeteorites() async
     func askForLocationAuthorization()
+    
+    func detailView(for meteorite: MeteoriteDecorator) -> MeteoriteDetail
 }
