@@ -44,9 +44,9 @@ struct MeteoriteDetail: View {
         } action: { _, newValue in
             scrollViewOffsetY = newValue
         }
+        .background(Color.background)
         .ignoresSafeArea(edges: .top)
         .navigationTitle(viewModel.meteorite.name)
-        .toolbar(.hidden, for: .tabBar)
     }
     
     private var imageView: some View {

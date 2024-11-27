@@ -12,7 +12,7 @@ struct MeteoritesList: View {
     @State private var navigationPath = NavigationPath()
     
     private let columns = [
-        GridItem(.adaptive(minimum: 240.0), spacing: 12.0)
+        GridItem(.adaptive(minimum: 270.0), spacing: 12.0)
     ]
     
     var body: some View {
