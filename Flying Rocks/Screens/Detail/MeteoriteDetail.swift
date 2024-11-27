@@ -5,12 +5,14 @@
 //  Created by Adam Konečný on 23.11.2024.
 //
 
+import Design
 import Kingfisher
 import SwiftUI
 
 struct MeteoriteDetail: View {
     @State var viewModel: MeteoriteDetailViewModelProtocol
     @State var scrollViewOffsetY: Double = 0.0
+    @State var imageWidth: Double = 320.0
     
     var body: some View {
         #warning("Fix: Navigation is too dark in contrast to the image")
@@ -46,20 +48,30 @@ struct MeteoriteDetail: View {
         }
         .background(Color.background)
         .ignoresSafeArea(edges: .top)
+        .customBackButton()
         .navigationTitle(viewModel.meteorite.name)
     }
     
     private var imageView: some View {
-        KFImage
-            .url(URL(string: viewModel.meteorite.imageUrl))
-            .placeholder {
-                Color.gray.opacity(0.2)
-                    .overlay(Image(systemName: "questionmark.circle"))
-            }
-            .resizable()
-            .aspectRatio(contentMode: .fill)
+        Color.clear
             .frame(maxWidth: .infinity)
-            .offset(y: scrollViewOffsetY <= 0.0 ? scrollViewOffsetY : 0.0)
+            .onGeometryChange(for: Double.self) { geometry in
+                geometry.size.width
+            } action: {
+                imageWidth = $0
+            }
+            .frame(height: imageWidth * 0.6)
+            .overlay(alignment: .bottom) {
+                KFImage
+                    .url(URL(string: viewModel.meteorite.imageUrl))
+                    .placeholder {
+                        Color.gray.opacity(0.2)
+                            .overlay(Image(systemName: "questionmark.circle"))
+                    }
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .frame(height: imageWidth * 0.6 + (scrollViewOffsetY <= 0.0 ? -scrollViewOffsetY : 0.0))
+            }
     }
 }
 

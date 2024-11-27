@@ -14,7 +14,10 @@ let package = Package(
             targets: ["Helpers"]),
         .library(
             name: "Location",
-            targets: ["Location"])
+            targets: ["Location"]),
+        .library(
+            name: "Design",
+            targets: ["Design"])
     ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
@@ -31,6 +34,9 @@ let package = Package(
         ),
         .target(
             name: "Location"
+        ),
+        .target(
+            name: "Design"
         )
     ]
 )
