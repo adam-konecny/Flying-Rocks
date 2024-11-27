@@ -15,10 +15,13 @@ struct MeteoriteDetail: View {
     @State var imageWidth: Double = 320.0
     
     var body: some View {
-        #warning("Fix: Navigation is too dark in contrast to the image")
-        
         ScrollView {
             imageView
+            
+            Text(viewModel.meteorite.name)
+                .font(.title)
+                .bold()
+                .padding(.vertical)
             
             VStack {
                 MeteoriteInfoItemView(
@@ -39,7 +42,7 @@ struct MeteoriteDetail: View {
                     value: viewModel.meteorite.date
                 )
             }
-            .padding()
+            .padding(.horizontal)
         }
         .onScrollGeometryChange(for: Double.self) { geometry in
             geometry.contentOffset.y
@@ -49,7 +52,7 @@ struct MeteoriteDetail: View {
         .background(Color.background)
         .ignoresSafeArea(edges: .top)
         .customBackButton()
-        .navigationTitle(viewModel.meteorite.name)
+        .toolbarColorScheme(.dark, for: .navigationBar)
     }
     
     private var imageView: some View {
@@ -71,6 +74,7 @@ struct MeteoriteDetail: View {
                     .resizable()
                     .aspectRatio(contentMode: .fill)
                     .frame(height: imageWidth * 0.6 + (scrollViewOffsetY <= 0.0 ? -scrollViewOffsetY : 0.0))
+                    .clipShape(.rect)
             }
     }
 }

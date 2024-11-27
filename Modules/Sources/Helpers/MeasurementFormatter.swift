@@ -8,6 +8,7 @@
 import Foundation
 
 public extension MeasurementFormatter {
+    // Temporary disgusting solution. 🤮
     nonisolated(unsafe) static let meteoriteFormatter: MeasurementFormatter = {
         let formatter = MeasurementFormatter()
         
