@@ -10,7 +10,7 @@ import Foundation
 struct Meteorite: Decodable {
     let id: String
     let name: String
-    let mass: Int?
+    let mass: Double?
     let date: Date?
     let location: Location?
     
@@ -23,7 +23,7 @@ struct Meteorite: Decodable {
         case longitude = "reclong"
     }
     
-    init(id: String, name: String, mass: Int, date: Date, latitude: Double, longitude: Double) {
+    init(id: String, name: String, mass: Double, date: Date, latitude: Double, longitude: Double) {
         self.id = id
         self.name = name
         self.mass = mass
@@ -41,7 +41,7 @@ struct Meteorite: Decodable {
         self.name = try container.decode(String.self, forKey: .name)
         
         if let mass = try container.decodeIfPresent(String.self, forKey: .mass) {
-            self.mass = try NumberFormatter.integer(from: mass)
+            self.mass = try NumberFormatter.double(from: mass)
         } else {
             self.mass = nil
         }

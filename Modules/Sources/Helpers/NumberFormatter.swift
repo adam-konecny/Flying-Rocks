@@ -37,8 +37,4 @@ public extension NumberFormatter {
     static func double(from string: String) throws -> Double {
         (try number(from: string)).doubleValue
     }
-    
-    static func integer(from string: String) throws -> Int {
-        (try number(from: string)).intValue
-    }
 }

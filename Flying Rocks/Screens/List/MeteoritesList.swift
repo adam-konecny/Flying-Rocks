@@ -44,9 +44,17 @@ struct MeteoritesList: View {
                 ForEach(meteorites) { meteorite in
                     NavigationLink(value: meteorite) {
                         MeteoriteListItem(meteorite: meteorite)
-                            .task {
-                                await viewModel.loadMore(currentItem: meteorite)
-                            }
+                    }
+                    .task {
+                        await viewModel.loadMore(currentItem: meteorite)
+                    }
+                    .scrollTransition(axis: .vertical) {
+                        content,
+                        phase in
+                        content.scaleEffect(
+                            x: phase.isIdentity ? 1.0 : 0.8,
+                            y: phase.isIdentity ? 1.0 : 0.8
+                        )
                     }
                 }
             }

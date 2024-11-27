@@ -17,8 +17,8 @@ public extension MeasurementFormatter {
         return formatter
     }()
     
-    static func meteoriteWeight(fromGrams grams: Int) -> String {
-        let measurement = Measurement(value: Double(grams), unit: UnitMass.grams)
+    static func meteoriteWeight(fromGrams grams: Double) -> String {
+        let measurement = Measurement(value: grams, unit: UnitMass.grams)
         
         return meteoriteFormatter.string(from: measurement)
     }
