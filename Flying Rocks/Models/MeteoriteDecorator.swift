@@ -39,7 +39,7 @@ struct MeteoriteDecorator: Identifiable, Hashable {
             return nil
         }
         
-        guard let date = meteorite.date?.string(with: .dayMonthYear) else {
+        guard let date = meteorite.date?.formatted(date: .long, time: .omitted) else {
             return nil
         }
         

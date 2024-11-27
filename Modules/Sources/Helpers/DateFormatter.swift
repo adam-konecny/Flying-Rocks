@@ -8,18 +8,11 @@
 import Foundation
 
 public extension DateFormatter {
+    // For extracting dates from the API.
     static let apiDate: DateFormatter = {
         let formatter = DateFormatter()
         
         formatter.dateFormat = "yyyy-MM-dd'T'hh:mm:ss.sss"
-        
-        return formatter
-    }()
-    
-    static let dayMonthYear: DateFormatter = {
-        let formatter = DateFormatter()
-        
-        formatter.dateFormat = DateFormatter.dateFormat(fromTemplate: "dMMMMyyyy", options: 0, locale: .current)
         
         return formatter
     }()
